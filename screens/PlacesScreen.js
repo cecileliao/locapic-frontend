@@ -12,7 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPlace, removePlace } from '../reducers/user';
 
-const BACKEND_ADDRESS = 'https://locapic-backend-cecileliao.vercel.app/';
+const BACKEND_ADDRESS = 'https://locapic-backend-cecileliao.vercel.app';
 
 export default function PlacesScreen() {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ const handleSubmit = () => {
       };
 
       // 2nd request : send new place to backend to register it in database
-      fetch(`https://locapic-backend-cecileliao.vercel.app/places`, {
+      fetch(`${BACKEND_ADDRESS}/places`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nickname: user.nickname, name: newPlace.name, latitude: newPlace.latitude, longitude: newPlace.longitude }),
@@ -78,7 +78,7 @@ const handleSubmit = () => {
 };
 
   const handleDelete = (placeName) => {
-    fetch(`https://locapic-backend-cecileliao.vercel.app/places`, {
+    fetch(`${BACKEND_ADDRESS}/places`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nickname: user.nickname, name: placeName }),

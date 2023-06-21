@@ -5,7 +5,7 @@ import { addPlace, importPlaces } from '../reducers/user';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
-const BACKEND_ADDRESS = 'https://locapic-backend-cecileliao.vercel.app/';
+const BACKEND_ADDRESS = 'https://locapic-backend-cecileliao.vercel.app';
 
 export default function MapScreen() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function MapScreen() {
       }
     })();
 
-    fetch(`https://locapic-backend-cecileliao.vercel.app/places/${user.nickname}`)
+    fetch(`${BACKEND_ADDRESS}/places/${user.nickname}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
@@ -50,7 +50,7 @@ export default function MapScreen() {
 
   const handleNewPlace = () => {
     // Send new place to backend to register it in database
-    fetch(`https://locapic-backend-cecileliao.vercel.app/places`, {
+    fetch(`${BACKEND_ADDRESS}/places`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nickname: user.nickname, name: newPlace, latitude: tempCoordinates.latitude, longitude: tempCoordinates.longitude }),
